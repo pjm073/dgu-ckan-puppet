@@ -1,3 +1,15 @@
+# data.gov.uk to go
+
+This repo provides scripts to install a copy of data.gov.uk's website to your own server. Rebrand it and you have a fully-featured government open data portal.
+
+Here is an overview:
+1. Virtual machine creation using Vagrant. (A fresh machine running Ubuntu 12.04 (Precise) works just as well.)
+2. Puppet install of the main software packages (Apache, Postgres, SOLR etc) and set-up linux users
+3. CKAN source - download from github
+4. CKAN database setup
+5. Data load (test data - optional)
+6. Drupal install
+
 # Setup
 
 Clone this repo. Switch to `$THIS_REPO/src` and clone all the CKAN source repos ready for development work.

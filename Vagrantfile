@@ -9,18 +9,19 @@ Vagrant.configure("2") do |config|
       puppet.manifests_path = "puppet/manifests"
       puppet.manifest_file  = "site.pp"
       puppet.facter = {
-        "motd" => "Built by Vagrant using librarian-puppet.",
+        "motd" => "data.gov.uk To Go built by Vagrant using librarian-puppet.",
         "fqdn" => "ckan.home",
         "pgpasswd" => "pass",
       }
   end
 
   # Allow local machines to view the VM
-  config.vm.network :forwarded_port, host: 2008, guest: 80
-  config.vm.network :forwarded_port, host: 2983, guest: 8983
-  config.vm.network :forwarded_port, host: 2432, guest: 5433
+  config.vm.network "private_network", ip: "192.168.11.11"
+  #config.vm.network :forwarded_port, host: 2008, guest: 80
+  #config.vm.network :forwarded_port, host: 2983, guest: 8983
+  #config.vm.network :forwarded_port, host: 2432, guest: 5433
   # for paster testing
-  config.vm.network :forwarded_port, host: 2050, guest: 5000
+  #config.vm.network :forwarded_port, host: 2050, guest: 5000
 
   config.vm.provider :virtualbox do |vb|
     config.vm.box = "precise64"
@@ -33,7 +34,7 @@ Vagrant.configure("2") do |config|
     # boot headless (or make true to get a display)
     vb.gui = false
     # Virtualbox Custom CPU count:
-    vb.customize ["modifyvm", :id, "--name", "dgu2_vm"]
+    vb.customize ["modifyvm", :id, "--name", "dgutg_vm"]
     vb.customize ["modifyvm", :id, "--memory", "8192"]
     vb.customize ["modifyvm", :id, "--cpus", "8"]
     vb.customize ["modifyvm", :id, "--ioapic", "on"]
@@ -45,7 +46,7 @@ Vagrant.configure("2") do |config|
     # 4GB RAM and 4 (hyperthreaded virtual) CPU cores
     vmware.vmx["memsize"] = "8192"
     vmware.vmx["numvcpus"] = "8"
-    vmware.vmx["displayName"] = "dgu2_vm2"
-    vmware.vmx["annotation"] = "Virtualised data.gov.uk 2 environment"
+    vmware.vmx["displayName"] = "dgutg_vm2"
+    vmware.vmx["annotation"] = "Virtualised data.gov.uk To Go environment"
   end 
 end
