@@ -1,6 +1,6 @@
 # Data.gov.uk To Go
 
-This repo provides scripts to install a copy of data.gov.uk's website to your own server. Rebrand it and you have a fully-featured government open data portal.
+This repo provides scripts to install a copy of data.gov.uk's website to your own server. Rebrand it and you have a fully-featured government open data portal. This has been updated to reflect changes specific for Umpqua Labs
 
 ## About
 
