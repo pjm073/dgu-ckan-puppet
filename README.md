@@ -51,7 +51,8 @@ Puppet also assumes your home user is 'ubuntu', so ensure that is created and ca
 You need to install some dependencies:
 
     sudo apt-get install rubygems git
-    sudo gem install librarian-puppet 
+    sudo gem install librarian-puppet
+    sudo gem install puppet
 
 And move the dgu-ckan-puppet repo to the place where it would end up if using Vagrant:
 
