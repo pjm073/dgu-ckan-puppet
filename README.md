@@ -29,7 +29,7 @@ Here is an overview of the install process:
 
 Clone this repo (its path will now be referred to as $THIS_REPO) and switch to the 'togo' branch:
 
-    git clone https://github.com/pjm073/dgu-ckan-puppet.git
+    git clone https://github.com/pjm073/dgu-ckan-puppet.git -b togo
     cd dgu-ckan-puppet
     git checkout togo
 
@@ -55,7 +55,7 @@ You need to install some dependencies:
 
 And move the dgu-ckan-puppet repo to the place where it would end up if using Vagrant:
 
-    mv dgu-ckan-puppet /vagrant
+    sudo mv ~/dgu-ckan-puppet /vagrant
 
 All further steps are to be carried out from the ssh session under the user 'ubuntu' on this target machine.
 
@@ -65,7 +65,7 @@ Use the script to clone all the CKAN source repos.
 
 If using a Vagrant VM, do this step on the host machine, not the VM.
 
-You may need to install git first. 
+You may need to install git first (and verify SSH keys are present on GitHub). 
 
     cd $THIS_REPO/src
     ./git_clone_all.sh
