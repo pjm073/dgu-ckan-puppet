@@ -2,22 +2,22 @@ Exec {
   # Set defaults for execution of commands
   path => "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/opt/ruby/bin",
 }
-group {"co":
+group {"ubuntu":
   ensure => present,
 }
-file {"/home/co":
-  require => [ User["co"], Group["co"] ],
+file {"/home/ubuntu":
+  require => [ User["ubuntu"], Group["ubuntu"] ],
   ensure  => directory,
-  owner   => "co",
-  group   => "co",
+  owner   => "ubuntu",
+  group   => "ubuntu",
 }
-user { "co":
-  require    => Group["co"],
+user { "ubuntu":
+  require    => Group["ubuntu"],
   ensure     => present,
   managehome => true,
-  gid        => "co",
+  gid        => "ubuntu",
   shell      => "/bin/bash",
-  home       => "/home/co",
+  home       => "/home/ubuntu",
   groups     => ["sudo","adm","www-data"],
 }
 
@@ -28,7 +28,7 @@ file { '/etc/motd':
   content => "Welcome to your Puppet-built virtual machine!
               $motd\n"
 }
-file { '/home/co/.bashrc':
+file { '/home/ubuntu/.bashrc':
    ensure => 'link',
    target => '/vagrant/.bashrc',
 }

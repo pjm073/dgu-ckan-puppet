@@ -3,10 +3,9 @@
 # git clone steps
 # ---------------
 
-git clone	git@github.com:datagovuk/ckan
+git clone	git@github.com/ckan/ckan
 cd ckan
-git checkout release-v2.0.1-dgu
-git remote add okfn git@github.com:okfn/ckan
+git checkout ckan-2.2
 cd -
 
 git clone	git@github.com:datagovuk/ckanext-archiver
@@ -30,9 +29,9 @@ cd ckanext-ga-report
 git checkout master
 cd -
 
-git clone	git@github.com:datagovuk/ckanext-harvest
+git clone	git@github.com:ckan/ckanext-harvest
 cd ckanext-harvest
-git checkout 2.0
+git checkout stable
 cd -
 
 git clone	git@github.com:datagovuk/ckanext-os
@@ -40,14 +39,14 @@ cd ckanext-os
 git checkout master
 cd -
 
-git clone	git@github.com:datagovuk/ckanext-qa
-cd ckanext-qa
-git checkout 2.0
-cd -
+#git clone	git@github.com:datagovuk/ckanext-qa
+#cd ckanext-qa
+#git checkout 2.0
+#cd -
 
-git clone	git@github.com:datagovuk/ckanext-spatial
+git clone	git@github.com:ckan/ckanext-spatial
 cd ckanext-spatial
-git checkout dgu
+git checkout stable
 cd -
 
 git clone	git@github.com:okfn/ckanext-importlib
@@ -55,10 +54,10 @@ cd ckanext-importlib
 git checkout master
 cd -
 
-git clone	git@github.com:datagovuk/ckanext-hierarchy
-cd ckanext-hierarchy
-git checkout master
-cd -
+#git clone	git@github.com:datagovuk/ckanext-hierarchy
+#cd ckanext-hierarchy
+#git checkout master
+#cd -
 
 git clone	git@github.com:datagovuk/shared_dguk_assets
 cd shared_dguk_assets

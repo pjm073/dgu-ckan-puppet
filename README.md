@@ -1,6 +1,6 @@
 # Data.gov.uk To Go
 
-This repo provides scripts to install a copy of data.gov.uk's website to your own server. Rebrand it and you have a fully-featured government open data portal. This has been updated to reflect changes specific for Umpqua Labs
+This repo provides scripts to install a copy of data.gov.uk's website to your own server. It has been rebrand and modified to fit the specific needs of Stumptown Labs
 
 ## About
 
@@ -29,21 +29,12 @@ Here is an overview of the install process:
 
 Clone this repo (its path will now be referred to as $THIS_REPO) and switch to the 'togo' branch:
 
-    git clone https://github.com/datagovuk/dgu-vagrant-puppet.git
-    cd dgu-vagrant-puppet
+    git clone https://github.com/pjm073/dgu-ckan-puppet.git
+    cd dgu-ckan-puppet
     git checkout togo
 
-### Option 1: Virtual Machine creation
 
-Install Vagrant. Launch a fully provisioned Virtual Machine as described in this repo:
-
-    cd $THIS_REPO
-    vagrant up
-    vagrant ssh
-
-The prompt will change to show your terminal is connected to the virtual machine. All further steps are from this ssh session on the VM.
-
-### Option 2: Fresh machine preparation
+### Option 1: Fresh machine preparation
 
 Instead of using a virtual-machine it is perfectly fine alternative to use a non-virtual machine, freshly installed with Ubuntu 12.04. The Puppet scripts assume the name of the machine is 'ckan', so you need to ssh to it and rename it:
 
@@ -51,22 +42,22 @@ Instead of using a virtual-machine it is perfectly fine alternative to use a non
     sudo vim /etc/hosts
     # ^ add "127.0.0.1  ckan" to hosts...
 
-Puppet also assumes your home user is 'co', so ensure that is created and can login as sudo.
+Puppet also assumes your home user is 'ubuntu', so ensure that is created and can login as sudo.
 
-    sudo adduser co
+    sudo adduser ubuntu
     sudo visudo
-    su co
+    su ubuntu
 
 You need to install some dependencies:
 
     sudo apt-get install rubygems git
     sudo gem install librarian-puppet 
 
-And move the dgu-vagrant-puppet repo to the place where it would end up if using Vagrant:
+And move the dgu-ckan-puppet repo to the place where it would end up if using Vagrant:
 
-    mv dgu-vagrant-puppet /vagrant
+    mv dgu-ckan-puppet /vagrant
 
-All further steps are to be carried out from the ssh session under the user 'co' on this target machine.
+All further steps are to be carried out from the ssh session under the user 'ubuntu' on this target machine.
 
 ## 2. CKAN source - download from Github
 

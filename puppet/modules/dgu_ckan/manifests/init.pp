@@ -1,16 +1,16 @@
 class dgu_ckan {
 
-  file {'/home/co/.ssh/':
+  file {'/home/ubuntu/.ssh/':
     ensure => directory,
-    owner  => 'co',
-    group  => 'co',
+    owner  => 'ubuntu',
+    group  => 'ubuntu',
   }
-  file {'/home/co/.ssh/authorized_keys':
+  file {'/home/ubuntu/.ssh/authorized_keys':
     ensure => file,
     source => "puppet:///modules/dgu_ckan/authorized_keys",
     mode   => 0755,
-    owner  => 'co',
-    group  => 'co',
+    owner  => 'ubuntu',
+    group  => 'ubuntu',
   }
   class { 'memcached':
       install_dev => true
@@ -39,8 +39,8 @@ class dgu_ckan {
   python::virtualenv { $ckan_virtualenv:
     ensure => present,
     version => 'system',
-    owner => 'co',
-    group => 'co',
+    owner => 'ubuntu',
+    group => 'ubuntu',
   }
 
   # Pip install everything
@@ -120,27 +120,27 @@ class dgu_ckan {
   dgu_ckan::pip_package { $pip_pkgs_remote:
     require => Python::Virtualenv[$ckan_virtualenv],
     ensure     => present,
-    owner      => 'co',
+    owner      => 'ubuntu',
     local      => false,
   }
   $pip_pkgs_local = [
     'ckan',
     'ckanext-dgu',
     'ckanext-os',
-    'ckanext-qa',
+    #'ckanext-qa',
     'ckanext-spatial',
     'ckanext-harvest',
     'ckanext-archiver',
     'ckanext-ga-report',
     'ckanext-datapreview',
     'ckanext-importlib',
-    'ckanext-hierarchy',
+    #'ckanext-hierarchy',
     'logreporter',
   ]
   dgu_ckan::pip_package { $pip_pkgs_local:
     require => Python::Virtualenv[$ckan_virtualenv],
     ensure  => present,
-    owner   => 'co',
+    owner   => 'ubuntu',
     local   => true,
   }
   # Not all Pip packages come with a global read permission
@@ -242,8 +242,8 @@ class dgu_ckan {
     require => Class['postgresql::server'],
   }
 
-  postgresql::server::role { "co":
-    password_hash => postgresql_password("co",$pg_superuser_pass),
+  postgresql::server::role { "ubuntu":
+    password_hash => postgresql_password("ubuntu",$pg_superuser_pass),
     createdb      => true,
     createrole    => true,
     login         => true,
@@ -275,7 +275,7 @@ class dgu_ckan {
     ],
   }
   # The testing process deletes all tables, which doesn't work if there are the Postgis
-  # ones there owned by the co user and no deletable. Reconsider this when testing
+  # ones there owned by the ubuntu user and no deletable. Reconsider this when testing
   # ckanext-spatial.
   exec {"createdb ${ckan_test_db_name}":
     command   => "createdb -O ${ckan_test_db_user} ${ckan_test_db_name} --template template_utf8",
@@ -341,21 +341,21 @@ class dgu_ckan {
     command => "/tmp/create_postgis_template.sh $ckan_test_db_user",
     unless  => "psql -l |grep template_postgis",
     path    => "/usr/bin:/bin",
-    user    => co,
+    user    => ubuntu,
     require => [
       File["/tmp/create_postgis_template.sh"],
       Package["postgresql-${postgis_version}-postgis"],
-      Postgresql::Server::Role["co"],
+      Postgresql::Server::Role["ubuntu"],
     ]
   }
   exec {"createdb utf8_template":
     command => "/tmp/create_utf8_template.sh",
     unless  => "psql -l |grep template_utf8",
     path    => "/usr/bin:/bin",
-    user    => co,
+    user    => ubuntu,
     require => [
       File["/tmp/create_utf8_template.sh"],
-      Postgresql::Server::Role["co"],
+      Postgresql::Server::Role["ubuntu"],
     ]
   }
 
@@ -485,7 +485,7 @@ class dgu_ckan {
 # ---------
 # Dev tools
 # ---------
-  file { "/home/co/.noserc":
+  file { "/home/ubuntu/.noserc":
     ensure => file,
     source => "puppet:///modules/dgu_ckan/noserc_template",
     mode   => 644,
