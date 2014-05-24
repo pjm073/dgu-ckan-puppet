@@ -3,7 +3,7 @@
 # git clone steps
 # ---------------
 
-git clone	git@github.com/ckan/ckan
+git clone	git@github.com:ckan/ckan
 cd ckan
 git checkout ckan-2.2
 cd -
