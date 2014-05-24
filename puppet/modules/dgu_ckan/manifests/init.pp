@@ -127,7 +127,7 @@ class dgu_ckan {
     'ckan',
     'ckanext-dgu',
     'ckanext-os',
-    #'ckanext-qa',
+    'ckanext-qa',
     'ckanext-spatial',
     'ckanext-harvest',
     'ckanext-archiver',
