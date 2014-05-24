@@ -3,9 +3,10 @@
 # git clone steps
 # ---------------
 
-git clone	git@github.com:ckan/ckan
+git clone	git@github.com:datagovuk/ckan
 cd ckan
-git checkout ckan-2.2
+git checkout release-v2.0.1-dgu
+git remote add okfn git@github.com:okfn/ckan
 git checkout fa60dc947eb6db612218d8d89affec7d6df3b096
 cd -
 
@@ -21,8 +22,9 @@ cd -
 
 git clone	git@github.com:datagovuk/ckanext-dgu
 cd ckanext-dgu
-git checkout 903-redesign
-ln -s ../commit-msg.githook ./.git/hooks/commit-msg
+git checkout master
+#git checkout 903-redesign
+#ln -s ../commit-msg.githook ./.git/hooks/commit-msg
 cd -
 
 git clone	git@github.com:datagovuk/ckanext-ga-report
@@ -40,10 +42,10 @@ cd ckanext-os
 git checkout master
 cd -
 
-#git clone	git@github.com:datagovuk/ckanext-qa
-#cd ckanext-qa
-#git checkout 2.0
-#cd -
+git clone	git@github.com:datagovuk/ckanext-qa
+cd ckanext-qa
+git checkout 2.0
+cd -
 
 git clone	git@github.com:ckan/ckanext-spatial
 cd ckanext-spatial
