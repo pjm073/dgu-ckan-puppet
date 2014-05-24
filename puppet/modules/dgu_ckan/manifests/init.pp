@@ -91,7 +91,7 @@ class dgu_ckan {
     'json-table-schema==0.1',
     'kombu==2.1.3',
     'kombu-sqlalchemy==1.1.0',
-    'lxml==2.2.4',
+    'lxml==3.3.5',
     'messytables==0.10.0',
     'nose==1.3.0',
     'ofs==0.4.1',
@@ -482,6 +482,24 @@ class dgu_ckan {
     logoutput => 'on_failure',
   }
 
+  # -----------
+  # Redis
+  # -----------
+  package {'redis-server':
+    ensure => installed,
+  }
+  dgu_ckan::pip_package { 'redis==2.9.1':
+    require => Python::Virtualenv[$ckan_virtualenv],
+    ensure  => present,
+    owner   => 'ubuntu',
+    local   => false,
+  }
+  service { 'redis-server':
+    enable    => true,
+    ensure    => running,
+    require   => Package['redis-server'],
+  }
+  
 # ---------
 # Dev tools
 # ---------
