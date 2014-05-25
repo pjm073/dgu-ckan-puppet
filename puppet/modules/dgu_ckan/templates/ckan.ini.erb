@@ -27,23 +27,18 @@ beaker.session.key = ckan
 beaker.session.secret = ${app_instance_secret}
 app_instance_uuid = ${app_instance_uuid}
 
-ckanext-os.geoserver.apikey = 0822e7b98adf11e1a66e183da21c99ac
-ckanext-os.geoserver.host = osinspiremappingprod.ordnancesurvey.co.uk
-ckanext-os.gazetteer.host = osinspiremappingprod.ordnancesurvey.co.uk
-ckanext-os.libraries.host = osinspiremappingprod.ordnancesurvey.co.uk
+#ckanext-os.geoserver.apikey = 0822e7b98adf11e1a66e183da21c99ac
+#ckanext-os.geoserver.host = osinspiremappingprod.ordnancesurvey.co.uk
+#ckanext-os.gazetteer.host = osinspiremappingprod.ordnancesurvey.co.uk
+#ckanext-os.libraries.host = osinspiremappingprod.ordnancesurvey.co.uk
 
 ckan.spatial.dataset_extent_map.routes = ckanext.dgu.controllers.package:PackageController/read
 ckan.spatial.dataset_extent_map.map_type = os
 
-ckan.plugins = dgu_publisher_form dgu_publishers dgu_auth_api dgu_form dgu_theme cswserver harvest gemini_csw_harvester gemini_doc_harvester gemini_waf_harvester spatial_harvest_metadata_api spatial_query qa synchronous_search dgu_search dgu_dataset_form spatial_metadata os_search os_preview archiver dgu_api ga-report datapreview dgu_inventory
+ckan.harvest.mq.type = redis
+
+ckan.plugins =  harvest ckan_harvester csw_harvester waf_harvester doc_harvester spatial_metadata spatial_query synchronous_search datapreview recline_preview text_preview pdf_preview resource_proxy 
 # removed:
-#   inspire_api, hierarchy_display
-
-dgu.xmlrpc_domain = drupal.libre.gov.fr:80
-dgu.xmlrpc_username = ckan
-dgu.xmlrpc_password = letmein
-
-dgu.use_raw_js = true
 
 ckan.legacy_templates = true
 

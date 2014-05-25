@@ -125,17 +125,8 @@ class dgu_ckan {
   }
   $pip_pkgs_local = [
     'ckan',
-    'ckanext-dgu',
-    'ckanext-os',
-    'ckanext-qa',
     'ckanext-spatial',
     'ckanext-harvest',
-    'ckanext-archiver',
-    'ckanext-ga-report',
-    'ckanext-datapreview',
-    'ckanext-importlib',
-    #'ckanext-hierarchy',
-    'logreporter',
   ]
   dgu_ckan::pip_package { $pip_pkgs_local:
     require => Python::Virtualenv[$ckan_virtualenv],
@@ -302,29 +293,6 @@ class dgu_ckan {
     unless    => "sudo -u postgres psql -d $ckan_db_name -c \"\\dt\" | grep package",
     logoutput => true,
   }
-  exec {"paster ga_reports init":
-    subscribe => Exec["paster db init"],
-    cwd       => "/vagrant/src/ckanext-ga-report",
-    command   => "${ckan_virtualenv}/bin/paster initdb --config=${ckan_ini}",
-    path      => "/usr/bin:/bin:/usr/sbin",
-    user      => root,
-    unless    => "sudo -u postgres psql -d $ckan_db_name -c \"\\dt\" | grep ga_url",
-    logoutput => true,
-  }
-  exec {"paster inventory init":
-    subscribe => Exec["paster db init"],
-    command   => "${ckan_virtualenv}/bin/paster --plugin=ckanext-dgu inventory_init --config=${ckan_ini}",
-    path      => "/usr/bin:/bin:/usr/sbin",
-    user      => root,
-    unless    => "sudo -u postgres psql -d $ckan_db_name -c \"\\dt\" | grep ga_url",
-    logoutput => true,
-  }
-  notify {"db_ready":
-    subscribe => [
-      Exec['paster inventory init'],
-      Exec['paster ga_reports init'],
-    ],
-    message   => "PostgreSQL database is ready.",
   }
   # Build template databases
   file { "/tmp/create_postgis_template.sh":
