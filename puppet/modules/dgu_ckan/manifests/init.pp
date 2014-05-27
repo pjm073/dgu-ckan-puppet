@@ -104,6 +104,7 @@ class dgu_ckan {
     'python-openid==2.2.5',
     'pytz==2012j',
     'pyparsing==2.0.2',
+    'pika==0.9.13',
     'pyutilib.component.core==4.6',
     'repoze.who==1.0.19',
     'repoze.who-friendlyform==1.0.8',
