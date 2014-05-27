@@ -103,6 +103,7 @@ class dgu_ckan {
     'python-magic==0.4.3',
     'python-openid==2.2.5',
     'pytz==2012j',
+    'pyparsing==2.0.2',
     'pyutilib.component.core==4.6',
     'repoze.who==1.0.19',
     'repoze.who-friendlyform==1.0.8',
@@ -293,6 +294,29 @@ class dgu_ckan {
     unless    => "sudo -u postgres psql -d $ckan_db_name -c \"\\dt\" | grep package",
     logoutput => true,
   }
+  exec {"paster ga_reports init":
+    subscribe => Exec["paster db init"],
+    cwd       => "/vagrant/src/ckanext-ga-report",
+    command   => "${ckan_virtualenv}/bin/paster initdb --config=${ckan_ini}",
+    path      => "/usr/bin:/bin:/usr/sbin",
+    user      => root,
+    unless    => "sudo -u postgres psql -d $ckan_db_name -c \"\\dt\" | grep ga_url",
+    logoutput => true,
+  }
+  exec {"paster inventory init":
+    subscribe => Exec["paster db init"],
+    command   => "${ckan_virtualenv}/bin/paster --plugin=ckanext-dgu inventory_init --config=${ckan_ini}",
+    path      => "/usr/bin:/bin:/usr/sbin",
+    user      => root,
+    unless    => "sudo -u postgres psql -d $ckan_db_name -c \"\\dt\" | grep ga_url",
+    logoutput => true,
+  }
+  notify {"db_ready":
+    subscribe => [
+      Exec['paster inventory init'],
+      Exec['paster ga_reports init'],
+    ],
+    message   => "PostgreSQL database is ready.",
   }
   # Build template databases
   file { "/tmp/create_postgis_template.sh":
