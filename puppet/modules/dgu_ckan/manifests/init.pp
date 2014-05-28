@@ -413,7 +413,7 @@ class dgu_ckan {
     require   => Class['solr'],
     ensure    => file,
     path      => "${jetty_home}/solr/collection1/conf/schema.xml",
-    source    => "/vagrant/src/ckanext-dgu/config/solr/schema-2.0-dgu.xml",
+    source    => "/vagrant/src/ckan/ckan/config/solr/schema.xml",
     owner     => "solr",
     group     => "solr",
     mode      => 0644,
