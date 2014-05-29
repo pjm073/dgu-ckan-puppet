@@ -314,8 +314,9 @@ class dgu_ckan {
   }
   notify {"db_ready":
     subscribe => [
-      Exec['paster inventory init'],
-      Exec['paster ga_reports init'],
+      Exec["paster db init"],
+      #Exec['paster inventory init'],
+      #Exec['paster ga_reports init'],
     ],
     message   => "PostgreSQL database is ready.",
   }
