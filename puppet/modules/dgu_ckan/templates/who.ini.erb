@@ -2,9 +2,9 @@
 use = repoze.who.plugins.auth_tkt:make_plugin
 secret = somesecret
 
-[plugin:dgu_auth_tkt]
-use = ckanext.dgu.authentication.auth_tkt:make_plugin
-secret = somesecret
+#[plugin:dgu_auth_tkt]
+#use = ckanext.dgu.authentication.auth_tkt:make_plugin
+#secret = somesecret
 
 [plugin:friendlyform]
 use = repoze.who.plugins.friendlyform:FriendlyFormPlugin
@@ -58,7 +58,7 @@ plugins =
 
 [challengers]
 plugins =
-    ckanext.dgu.authentication.drupal_repoze_plugin:DrupalLoginPlugin
+#   ckanext.dgu.authentication.drupal_repoze_plugin:DrupalLoginPlugin
     friendlyform;browser
-#   basicauth
+    basicauth
 
